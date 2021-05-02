@@ -1,0 +1,4 @@
+[COMMANDS]:
+
+-v | -V | --verbose -> turn verbose on or off 
+-h | -H | --help -> show this menu
