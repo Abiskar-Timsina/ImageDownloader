@@ -1,33 +1,40 @@
-import requests 
 import bs4
-import time
-
 import json
-import os
+import requests 
 import threading
-import sys
 
-import utils
+from .utils import *
+
+#created a empty list to handle threads
+active_threads = list() 
 
 @utils.Config.main
 def main():
-	text = input("Enter the search param: ")
-	obj = utils.Config(text)
+	search_query = input("Enter the search param: ")
+	utils_obj = utils.Config(search_query)
+
 	with requests.Session() as req:
-		page = req.get(obj.url,params=obj.PARAMS,headers=obj.HEADERS)
-		home_page = bs4.BeautifulSoup(page.text,"lxml")
-		VQD = obj.GetVQD(home_page)
-		x = obj.GetResponseParams(VQD)
-		page2 = req.get(obj.Response_URL,params=x)
+		#this page is required to get the encryption key (VQD) 
+		script_page = req.get(utils_obj.url,params=utils_obj.PARAMS,headers=utils_obj.HEADERS)
+		home_page = bs4.BeautifulSoup(script_page.text,"lxml")
+
+		#getting the encryption and the required query strings
+		VQD = utils_obj.GetVQD(home_page)
+
+		#note that different URL is used in this case compared to the former
+		response_param = utils_obj.GetResponseParams(VQD)
+
+		#sending the request with an encryption key to get a valid JSON output
+		response_page = req.get(utils_obj.Response_URL,params=response_param)
+		response_json = json.loads(response_page.text)
 		
-		response_json = json.loads(page2.text)
+		#parsing for the required data
 		data_results = response_json['results']
 
-		for i in range(len(data_results)):
-			image_url = data_results[i]['image']
-			print(image_url)
-
+		#simple iteration over each image link
+		for index_image_url in range(len(data_results)):
+			image_url = data_results[index_image_url]['image']
+			DownloadManager(search_query,image_url)
 
 if __name__ == "__main__":
 	main()
-

@@ -1,1 +1,1 @@
-from .utils import Config
+from .utils import Config,DownloadManager
