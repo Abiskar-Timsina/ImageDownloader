@@ -22,17 +22,38 @@ def main():
 		#note that different URL is used in this case compared to the former
 		response_param = utils_obj.GetResponseParams(VQD)
 
-		#sending the request with an encryption key to get a valid JSON output
-		response_page = req.get(utils_obj.Response_URL,params=response_param)
-		response_json = json.loads(response_page.text)
-		
-		#parsing for the required data
-		data_results = response_json['results']
+		#we go through multiple pages
+		for page in range(Config.max_pages):
+			#sending the request with an encryption key to get a valid JSON output
+			response_page = req.get(utils_obj.Response_URL,params=response_param)
+			response_json = json.loads(response_page.text)
+			
+			#parsing for the required data
+			data_results = response_json['results']
 
-		#simple iteration over each image link
-		for index_image_url in range(len(data_results)):
-			image_url = data_results[index_image_url]['image']
-			DownloadManager(image_url)
+			#simple iteration over each image link
+			for index_image_url in range(len(data_results)):
+				image_url = data_results[index_image_url]['image']
+				print(image_url)
+				# utils.DownloadManager(image_url)
+
+			#the count starts from 0 and the first param is already 1
+			'''
+			first loop:
+			page:0; p:1
+
+			second loop:
+			page:1; p: (0+2){from prev iterations} = 2
+
+			third loop:
+			page:2, p: (1+2){from prev iterations} = 3
+			.
+			.
+			.
+			and so on...
+			'''
+
+			response_param['p'] = page + 2
 
 if __name__ == "__main__":
 	main()

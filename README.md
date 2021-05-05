@@ -1,11 +1,16 @@
 2nd iteration:
 	Completed:
-		- Paramater parsing
+		- error handling and extension parsing 
+		- handled parameter parsing
+		- Multiple pages support
+		- Added config file entry for max pages
+		- Show current stats after the help command.
+
 	TODO:
-		-file format .jpg / etc not checked nor handled
-		-error handling
-		-test 
+		-A progress bar of some sort
 		-documentation and read me
-		-Multiple pages support
 		-async function not added
 		-help documentation as well
+		-add limit to threading if needed
+		-check resource usuage
+		-add syntax of max page management
