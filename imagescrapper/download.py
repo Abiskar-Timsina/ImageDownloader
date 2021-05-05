@@ -10,9 +10,7 @@ active_threads = list()
 
 @utils.Config.main
 def main():
-	search_query = input("Enter the search param: ")
-	utils_obj = utils.Config(search_query)
-
+	utils_obj = utils.Config()
 	with requests.Session() as req:
 		#this page is required to get the encryption key (VQD) 
 		script_page = req.get(utils_obj.url,params=utils_obj.PARAMS,headers=utils_obj.HEADERS)
@@ -34,7 +32,7 @@ def main():
 		#simple iteration over each image link
 		for index_image_url in range(len(data_results)):
 			image_url = data_results[index_image_url]['image']
-			DownloadManager(search_query,image_url)
+			DownloadManager(image_url)
 
 if __name__ == "__main__":
 	main()

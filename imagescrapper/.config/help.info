@@ -1,4 +1,8 @@
-[COMMANDS]:
+[Usuage]:
+	To be added later on
 
--v | -V | --verbose -> turn verbose on or off 
--h | -H | --help -> show this menu
+
+[Commands / Parameters]
+	-v | -V | --verbose -> turn verbose on or off 
+	-h | -H | --help -> show this menu
+	-l | -L | --links -> show links
