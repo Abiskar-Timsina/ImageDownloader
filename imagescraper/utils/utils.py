@@ -4,14 +4,13 @@ import json
 import os
 import re
 import requests 
-import imagescrapper
+import imagescraper
 
 #internal class that's initialized just to initialize the config files
 class __ParseConfigFile:
 	def __init__(self) -> None:
 		global parameter
-		path = imagescrapper.__path__[0] + "/.config/config.ini"
-		#"imagescrapper/.config/config.ini"
+		path = imagescraper.__path__[0] + "/.config/config.ini"
 		with open(path, 'r') as config_file:
 			self.config = json.load(config_file)
 
@@ -57,8 +56,7 @@ class __ParseConfigFile:
 				raise SystemExit(0)
 
 	def __ShowHelp(self):
-		path = imagescrapper.__path__[0] + "/.config/help.info"
-		#"imagescrapper/.config/help.info"
+		path = imagescraper.__path__[0] + "/.config/help.info"
 		with open(path,'r') as help_file:
 			print(help_file.read())
 
@@ -68,10 +66,10 @@ class __ParseConfigFile:
 		print(f"Max Pages  -> {self.max_pages}")
 
 		print("\n--- About ---",end="\n\n")
-		print(f"Version: {imagescrapper.__version__}")
-		print(f"Author: {imagescrapper.__author__}")
-		print(f"Author's Email: {imagescrapper.__email__}")
-		print(f"Github: {imagescrapper.__github__}",end="\n\n")
+		print(f"Version: {imagescraper.__version__}")
+		print(f"Author: {imagescraper.__author__}")
+		print(f"Author's Email: {imagescraper.__email__}")
+		print(f"Github: {imagescraper.__github__}",end="\n\n")
 
 class Config(__ParseConfigFile):
 	def __init__(self) -> None:
@@ -159,7 +157,7 @@ class DownloadManager:
 			if (re.match(r"[egjnp]{3,4}$",targeturl_extension)):	
 				pic_format = targeturl_extension.lower()
 			else:
-				raise imagescrapper.NonSpecifiedExtention("Non Specified extention")
+				raise imagescraper.NonSpecifiedExtention("Non Specified extention")
 
 
 			naming_template = Template("./$query/$picture_count.$format")
@@ -180,5 +178,5 @@ class DownloadManager:
 				DownloadManager.picture_count += 1
 				DownloadManager.successful_downloads += 1
 
-		except imagescrapper.NonSpecifiedExtention:
+		except imagescraper.NonSpecifiedExtention:
 			DownloadManager.bad_links += 1

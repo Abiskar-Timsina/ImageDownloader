@@ -1,6 +1,6 @@
 # ImageDownloader:
 ##### About:
-ImageDownloader is a simple web scrapping tool that can be used to download images directly form duckduckgo.com. This is a personal project that I have been coding over the weekend. I built this because I found myself continuously downloading images from various sites for data collection. So, I decided to automate it.
+ImageDownloader is a simple web scraping tool that can be used to download images directly form duckduckgo.com. This is a personal project that I have been coding over the weekend. I built this because I found myself continuously downloading images from various sites for data collection. So, I decided to automate it.
 
 ## Features:
 - CLI tool for image collection; use directly from the command line.

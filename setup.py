@@ -11,9 +11,9 @@ setup(
 	install_requires = requirements[:-1],
 
 	entry_points = {
-	"console_scripts":["imagedownloader=imagescrapper.download:main"]
+	"console_scripts":["imagedownloader=imagescraper.download:main"]
 	},
 	
-    data_files=[('imagescrapper/.config', ['imagescrapper/.config/config.ini', 'imagescrapper/.config/help.info'])],
+    data_files=[('imagescraper/.config', ['imagescraper/.config/config.ini', 'imagescraper/.config/help.info'])],
      
 	)
