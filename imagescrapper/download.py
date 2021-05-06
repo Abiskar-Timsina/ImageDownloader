@@ -1,12 +1,9 @@
 import bs4
 import json
 import requests 
-import threading
+import asyncio
 
 from .utils import *
-
-#created a empty list to handle threads
-active_threads = list() 
 
 @utils.Config.main
 def main():
@@ -23,6 +20,7 @@ def main():
 		response_param = utils_obj.GetResponseParams(VQD)
 
 		#we go through multiple pages
+
 		for page in range(Config.max_pages):
 			#sending the request with an encryption key to get a valid JSON output
 			response_page = req.get(utils_obj.Response_URL,params=response_param)
@@ -34,9 +32,12 @@ def main():
 			#simple iteration over each image link
 			for index_image_url in range(len(data_results)):
 				image_url = data_results[index_image_url]['image']
-				print(image_url)
-				# utils.DownloadManager(image_url)
 
+				#async functions
+				loop = asyncio.get_event_loop()
+				task = loop.create_task(DownloadManager().downloader(image_url))
+				loop.run_until_complete(task)
+			
 			#the count starts from 0 and the first param is already 1
 			'''
 			first loop:
@@ -54,6 +55,7 @@ def main():
 			'''
 
 			response_param['p'] = page + 2
+			loop.close()
 
 if __name__ == "__main__":
 	main()

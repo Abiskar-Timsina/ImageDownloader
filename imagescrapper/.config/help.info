@@ -1,12 +1,29 @@
 ImageDownloader:
-	ImageDownloader is a simple web scrapping tool that can be used to download images from the duckduckgo domain ... to be added
-
+ImageDownloader is a simple web scrapping tool that can be used to download images directly form duckduckgo.com. This is a personal project that is 
+still open for further development and is in just its beta stage.If you find any errors please report it to the email address given below.
 
 [Usuage]:
-	To be added later on
+Simply run the command anywhere by using:
+
+	$imagedownloader <search query> <flags>
+
+[Flags]
+Verbose:
+
+-v | -V | --verbose 
+
+-> Shows where the file is being saved to; Use the flags to turn it off.
 
 
-[Commands / Parameters]
-	-v | -V | --verbose -> turn verbose on or off 
-	-h | -H | --help -> show this menu
-	-l | -L | --links -> show links
+Links:
+
+-l | -L | --links
+
+-> Use this flag if you want to see the URLs that the image is being downloaded from.
+
+Help:
+
+-h | -H | --help 
+
+-> Show this menu.
+	
